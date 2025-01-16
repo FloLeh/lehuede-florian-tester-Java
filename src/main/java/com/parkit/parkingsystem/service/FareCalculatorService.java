@@ -14,13 +14,13 @@ public class FareCalculatorService {
         long outHour = ticket.getOutTime().getTime();
 
         // Duration in hours with decimal
-        float duration = (outHour - inHour) / (1_000 * 60 * 60);
+        double duration = (outHour - inHour) / (1_000. * 60. * 60.);
         if (duration < 0.5) {
-            ticket.setPrice(0);
+            ticket.setPrice(0.);
             return;
         }
 
-        double discountMultiplicator = discount ? 0.95 : 1;
+        double discountMultiplicator = discount ? 0.95d : 1d;
 
         switch (ticket.getParkingSpot().getParkingType()){
             case CAR: {
