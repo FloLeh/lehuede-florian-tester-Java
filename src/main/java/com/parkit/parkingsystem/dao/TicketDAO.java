@@ -90,7 +90,6 @@ public class TicketDAO {
 
     public int getNbTicket(String vehicleRegNumber) {
         Connection con = null;
-        Integer nbTicket = 0;
         try {
             con = dataBaseConfig.getConnection();
             PreparedStatement ps = con.prepareStatement(DBConstants.GET_NB_TICKET);
@@ -104,6 +103,6 @@ public class TicketDAO {
         } finally {
             dataBaseConfig.closeConnection(con);
         }
-        return nbTicket;
+        return 0;
     }
 }
