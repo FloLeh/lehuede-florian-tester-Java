@@ -165,7 +165,7 @@ public class FareCalculatorServiceTest {
         ticket.setOutTime(outTime);
         ticket.setParkingSpot(parkingSpot);
         fareCalculatorService.calculateFare(ticket, true);
-        assertEquals( (Fare.CAR_RATE_PER_HOUR * 0.95) , ticket.getPrice());
+        assertEquals(1.425 , ticket.getPrice());
     }
 
     @Test
@@ -179,41 +179,7 @@ public class FareCalculatorServiceTest {
         ticket.setOutTime(outTime);
         ticket.setParkingSpot(parkingSpot);
         fareCalculatorService.calculateFare(ticket, true);
-        assertEquals( (Fare.BIKE_RATE_PER_HOUR * 0.95) , ticket.getPrice());
+        assertEquals(0.95 , ticket.getPrice());
     }
-
-//     private static Stream<Arguments> provideAllArguments() {
-//         return Stream.of(
-//             Arguments.of(60, ParkingType.CAR, false),
-//             Arguments.of(60, ParkingType.BIKE, false),
-//             Arguments.of(45, ParkingType.CAR, false),
-//             Arguments.of(45, ParkingType.BIKE, false),
-//             Arguments.of(24 * 60, ParkingType.CAR, false),
-//             Arguments.of(24 * 60, ParkingType.BIKE, false),
-//             Arguments.of(25, ParkingType.CAR, false),
-//             Arguments.of(25, ParkingType.BIKE, false),
-//             Arguments.of(60, ParkingType.CAR, true),
-//             Arguments.of(60, ParkingType.BIKE, true)
-//         );
-//     }
-
-//     @ParameterizedTest
-//     @MethodSource("provideAllArguments")
-//     public void calculateFareGlobalTest(int minutes, ParkingType parkingType, boolean discount) {
-//         Date inTime = new Date();
-//         inTime.setTime(System.currentTimeMillis() - (minutes * 60 * 1000 ));
-//         Date outTime = new Date();
-//         ParkingSpot parkingSpot = new ParkingSpot(1, parkingType, false);
-//         double fare = parkingType == ParkingType.CAR ? Fare.CAR_RATE_PER_HOUR : Fare.BIKE_RATE_PER_HOUR;
-//         double discountFare = discount ? 0.95 : 1.;
-//         double expected = minutes < 30 ? 0. : minutes / 60. * fare * discountFare;
-
-
-//         ticket.setInTime(inTime);
-//         ticket.setOutTime(outTime);
-//         ticket.setParkingSpot(parkingSpot);
-//         fareCalculatorService.calculateFare(ticket, discount);
-//         assertEquals( expected , ticket.getPrice());
-//     }
 
 }
