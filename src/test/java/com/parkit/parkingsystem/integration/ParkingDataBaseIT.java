@@ -79,11 +79,14 @@ public class ParkingDataBaseIT {
 
     @Test
     public void testParkingACar(){
+        // GIVEN
         assertNull(ticketDAO.getTicket(vehicleRgNumber)); // ticket should not exist yet
         assertEquals(1, parkingSpotDAO.getNextAvailableSlot(ParkingType.CAR)); // parkingSpot 1 should be avaiblable
         
+        // WHEN
         parkingService.processIncomingVehicle();
 
+        // THEN
         Ticket ticket = ticketDAO.getTicket(vehicleRgNumber);
         assertEquals(ticket.getVehicleRegNumber(), vehicleRgNumber);
         
@@ -93,11 +96,14 @@ public class ParkingDataBaseIT {
 
     @Test
     public void testParkingLotExit(){
+        // GIVEN
         ParkingSpot parkingSpot = parkingService.getNextParkingNumberIfAvailable();
         createTicket(parkingSpot);
 
+        // WHEN
         parkingService.processExitingVehicle();
 
+        // THEN
         Ticket ticket = ticketDAO.getTicket(vehicleRgNumber);
         assertEquals(1.5, ticket.getPrice()); // Price for 1 hour for a CAR
 
@@ -106,12 +112,15 @@ public class ParkingDataBaseIT {
 
     @Test
     public void testParkingLotExitRecurringUser() {
+        // GIVEN
         ParkingSpot parkingSpot = parkingService.getNextParkingNumberIfAvailable();
         createTicket(parkingSpot);
         createTicket(parkingSpot);
 
+        // WHEN
         parkingService.processExitingVehicle();
 
+        // THEN
         Ticket ticket = ticketDAO.getTicket(vehicleRgNumber);
         assertEquals(1.425, ticket.getPrice()); // Price for 1 hour for a CAR with a discount
     }
